@@ -1,7 +1,7 @@
 // immediate retry
-const retry = (operation) => {
-  let currentTry = 0;
-  let maxTry = 10;
+const retry = (operation: Function): void => {
+  let currentTry: number = 0;
+  let maxTry: number = 10;
 
   while (true) {
     try {
@@ -19,8 +19,8 @@ const retry = (operation) => {
   }
 };
 
-const externalCall = () => {
-  const shouldPass = Math.random() < 0.5;
+const externalCall = (): boolean => {
+  const shouldPass: boolean = Math.random() < 0.5;
   if (shouldPass) {
     return true;
   }

@@ -1,28 +1,29 @@
 class Process {
-  constructor(state) {
-    this.state = state;
-  }
+  constructor(public state: string) {}
 }
 
 const Singleton = (function () {
   class ProcessManager {
+    static numberOfInstances: number = 0;
+    public numberOfProcesses: number = 0;
     constructor() {
-      this.numberOfProcesses = 0;
+      ProcessManager.numberOfInstances++;
     }
   }
 
-  let processManager;
+  let processManager: ProcessManager;
 
-  const createProcessManager = () => {
-    const newPM = new ProcessManager();
+  const createProcessManager = (): ProcessManager => {
+    const newPM: ProcessManager = new ProcessManager();
     return newPM;
   };
 
   return {
-    getProcessManager: () => {
+    getProcessManager: (): ProcessManager => {
       if (!processManager) {
         processManager = createProcessManager();
       }
+      console.log(ProcessManager.numberOfInstances); // always 1
       return processManager;
     },
   };

@@ -1,4 +1,4 @@
-// // WRONG WAY
+// // WRONG WAY (kept in JS code)
 // class Recatangle {
 //   constructor(width, height) {
 //     this.width = width;
@@ -39,20 +39,13 @@
 // console.log(rectangle2.area()); // not the same result
 
 // RIGHT WAY
-class Shape {
-  constructor() {
-    throw new Error(`Can't instantiate abstract class`);
-  }
-
-  area() {
-    throw new Error("Abstract method not implemented");
-  }
+abstract class Shape {
+  abstract area(): number;
 }
 
 class Recatangle extends Shape {
-  constructor(width, height) {
-    this.width = width;
-    this.height = height;
+  constructor(public width: number, public height: number) {
+    super();
   }
 
   area() {
@@ -61,11 +54,11 @@ class Recatangle extends Shape {
 }
 
 class Square extends Shape {
-  constructor(side) {
-    this.side = side;
+  constructor(public side: number) {
+    super();
   }
 
   area() {
-    return side * side;
+    return this.side * this.side;
   }
 }

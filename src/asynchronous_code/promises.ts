@@ -1,6 +1,6 @@
-const fetchData = () => {
+const fetchDataPromises = (): Promise<string> => {
   console.log("fetching data");
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve("data");
       // reject("ERROR");
@@ -8,7 +8,7 @@ const fetchData = () => {
   });
 };
 
-fetchData()
+fetchDataPromises()
   .then((value) => {
     console.log(value);
   })

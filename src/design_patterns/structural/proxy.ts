@@ -1,5 +1,5 @@
 class CryptoAPI {
-  getValue(coin) {
+  getValue(coin: string): number {
     console.log("calling external API");
     switch (coin) {
       case "Bitcoin":
@@ -8,17 +8,17 @@ class CryptoAPI {
         return 240;
       case "Ethereum":
         return 10000;
+      default:
+        throw new Error("Invalid coin value");
     }
   }
 }
 
 class CryptoProxy {
-  constructor() {
-    this.api = new CryptoAPI();
-    this.cache = {};
-  }
+  private api: CryptoAPI = new CryptoAPI();
+  private cache: { [coin: string]: number } = {};
 
-  getValue(coin) {
+  getValue(coin: string): number {
     if (this.cache[coin] == null) {
       this.cache[coin] = this.api.getValue(coin);
     }
@@ -26,7 +26,7 @@ class CryptoProxy {
   }
 }
 
-const proxy = new CryptoProxy();
+const proxy: CryptoProxy = new CryptoProxy();
 console.log(proxy.getValue("Bitcoin"));
 console.log(proxy.getValue("Litecoin"));
 console.log(proxy.getValue("Ethereum"));

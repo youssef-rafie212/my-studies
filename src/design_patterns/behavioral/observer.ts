@@ -1,13 +1,11 @@
 class Subject {
-  constructor() {
-    this.observers = [];
-  }
+  public observers: Function[] = [];
 
-  subscribe(observer) {
+  subscribe(observer: Function): void {
     this.observers.push(observer);
   }
 
-  unsubscribe(observer) {
+  unsubscribe(observer: Function): void {
     this.observers = this.observers.filter((obs) => {
       if (obs != observer) {
         return obs;
@@ -15,24 +13,23 @@ class Subject {
     });
   }
 
-  fire() {
+  fire(): void {
     this.observers.forEach((obs) => {
       obs();
     });
   }
 }
 
-const observer1 = () => {
+const observer1 = (): void => {
   console.log("observer 1 running");
 };
 
-const observer2 = () => {
+const observer2 = (): void => {
   console.log("observer 2 running");
 };
 
-const subject = new Subject();
+const subject: Subject = new Subject();
 
 subject.subscribe(observer1);
 subject.subscribe(observer2);
-subject.unsubscribe(observer1);
-subject.fire(); // observer 2 running
+subject.fire();
